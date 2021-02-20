@@ -7,6 +7,7 @@ public class Task {
     int end = 0;
     int interval = 0;
     boolean active = false;
+    int current = 0;
 
     //Constructor de la clase Task que será usado para construir una tarea que se encuentra deshabilitada en
     // determinado tiempo  sin repetirse
@@ -69,7 +70,9 @@ public class Task {
     }
 
     public int getEndTime(){
-        return end;
+        if (this.interval == 0){    //Si la tarea no es repetitiva
+            return time;
+        }else return end;
     }
 
     public int getRepeatInterval(){
@@ -85,20 +88,19 @@ public class Task {
 
     //Metodo para consultar si una tarea es repetitiva
     public boolean isRepeated(){
-        if (this.interval == 0){
-            return false;
-        }else{
-            return true;
-        }
+        return this.interval != 0;  //Sí el intervalo es diferente de 0 significa que es una tarea repetitiva
     }
 
     //Metodo que regresa el siguiente tiempo de ejecución en una tarea repetitiva.
     //En caso de que la tarea llegue al último intervalo de ejecución regresará "-1".
+
+    //Metodo que se ejecutará cada que la alarma de la tarea llegue al tiempo de ejecución y así actualizar el tiempo start para tareas repetitivas.
     public int nextTimeAfter(int current){
         if((this.end - current) == 0){
             return -1;
         }else{
-            return (current + this.interval);
+            this.start = current + this.interval;
+            return (start);
         }
     }
 }
