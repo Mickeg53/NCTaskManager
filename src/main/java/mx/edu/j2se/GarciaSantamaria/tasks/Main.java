@@ -91,6 +91,42 @@ public class Main {
         tarea2.current = tarea2.nextTimeAfter(tarea2.current);
         System.out.println("El siguiente tiempo de ejecución de la tarea: "+tarea2.getTitle()+" es "+tarea2.current);
 
+
+        System.out.println("");
+        System.out.println("PRUEBA DE ARREGLO DE TAREAS");
+        System.out.println("");
+
+
+
+        ArrayTaskList arrayOfTasks = new ArrayTaskList();                                                       //Declaración de objeto arregloDeTareas del tipo ArrayTaskList
+
+        Task tempTask;                                                                                          //Creación de nuevo objeto tarea temporal para obtener tareas agregadas al arreglo.
+
+        arrayOfTasks.add(tarea2);                                                                               //Agregando la tarea2 previamente creada al arreglo de tareas
+        tempTask = arrayOfTasks.getTask(0);                                                               //Obteniendo la tarea recien agregada al arreglo
+        System.out.println("La tarea agregada de nombre: -"+tempTask.getTitle()+"- tiene índice: "+arrayOfTasks.index);
+        System.out.println("El tamaño del arreglo de objetos es: "+arrayOfTasks.size());
+
+        arrayOfTasks.add(tarea1);                                                                               //Agregando la tarea1 previamente creada al arreglo de tareas
+        tempTask = arrayOfTasks.getTask(1);                                                               //Obteniendo la tarea recien agregada al arreglo
+        System.out.println("La tarea agregada de nombre: -"+tempTask.getTitle()+"- tiene índice: "+arrayOfTasks.index);
+        System.out.println("El tamaño del arreglo de objetos es: "+arrayOfTasks.size());
+
+        if (arrayOfTasks.remove(tarea2)){                                                                       //Eliminando y comprobando que la tarea2 con indice 0 fue eliminada desplazando las tareas subsiguientes al indice que quedó libre y poder acortar el tamaño del arreglo.
+                System.out.println("La tarea fue eliminada, el tamaño del arreglo es: "+arrayOfTasks.size());
+            }else{
+                System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
+        }
+
+        tempTask = arrayOfTasks.getTask(arrayOfTasks.index);                                                    //Obteniendo la última tarea que quedó en el arreglo
+        System.out.println("La tarea con indice: "+(arrayOfTasks.index)+" es: -"+ tempTask.getTitle()+"-");
+        System.out.println("El tamaño del arreglo de objetos es: "+arrayOfTasks.size());
+
+        if (arrayOfTasks.remove(tarea1)){                                                                       //Eliminando y comprobando que la tarea1 con indice 0 (antes indice 1) fue eliminada.
+                System.out.println("La tarea fue eliminada, el tamaño del arreglo es: "+arrayOfTasks.size());
+        }else{
+                System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
+        }
 	}
 	/*
 	public static String loDejanEntrarAlBar(int laEdad){

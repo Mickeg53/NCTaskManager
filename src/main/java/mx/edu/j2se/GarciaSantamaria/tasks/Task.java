@@ -25,6 +25,7 @@ public class Task {
         this.end=end;
     }
 
+
     //Metodos para obtener y agregar titulo a las tareas
     public String getTitle() {
         return title;
