@@ -7,7 +7,6 @@ public class Task {
     int end = 0;
     int interval = 0;
     boolean active = false;
-    int current = 0;
 
     //Constructor de la clase Task que será usado para construir una tarea que se encuentra deshabilitada en
     // determinado tiempo  sin repetirse
@@ -97,11 +96,18 @@ public class Task {
 
     //Metodo que se ejecutará cada que la alarma de la tarea llegue al tiempo de ejecución y así actualizar el tiempo start para tareas repetitivas.
     public int nextTimeAfter(int current){
-        if((this.end - current) == 0){
-            return -1;
-        }else{
-            this.start = current + this.interval;
-            return (start);
+
+        int nextTime = 0;
+
+        if((this.interval != 0 && (this.end - current) <= 0 )||(this.interval == 0 && (this.time - current <= 0))){
+            nextTime = -1;
+        }else if(this.interval != 0){
+            int numOfIntervals = (this.end-this.start)/interval;
+            numOfIntervals = (current-(current%this.interval))/this.interval;
+            nextTime = (numOfIntervals+1)*this.interval;
+        }else if(this.interval == 0){
+            nextTime = this.time;
         }
+        return nextTime;
     }
 }

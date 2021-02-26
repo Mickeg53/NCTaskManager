@@ -28,39 +28,41 @@ public class Main {
 			System.out.println("NO SE HA INGRESADO LA NACIONALIDAD DE " + estudianteNC2.getNombre());
 		}*/
 
+        int current = 15;
+
         Task tarea1 = new Task("Estudiar",20);  //Creacion de nuevo objeto tarea1
 
         //Prueba de metodo getTitle y getTime
-        System.out.println("La tarea: "+tarea1.getTitle()+" será ejecutada a las "+tarea1.getTime()+" hrs.");
+        System.out.println("La tarea: -"+tarea1.getTitle()+"- será ejecutada a las "+tarea1.getTime()+" hrs.");
 
         //Prueba de metodo setTitle
         tarea1.setTitle("Estudiar JAVA");
 
         //Prueba de metodo setTime(int time)
         tarea1.setTime(30);
-        System.out.println("La tarea: "+tarea1.getTitle()+" será ejecutada a las "+tarea1.getTime()+" hrs.");
+        System.out.println("La tarea: -"+tarea1.getTitle()+"- será ejecutada a las "+tarea1.getTime()+" hrs.");
 
         //Prueba de metodo isActive y setActive
         if (tarea1.isActive()){
-            System.out.println("la tarea: "+tarea1.getTitle()+" se encuentra activa.");
+            System.out.println("la tarea: -"+tarea1.getTitle()+"- se encuentra activa.");
         }else{
-            System.out.println("la tarea: "+tarea1.getTitle()+" se encuentra desactiva.");
-            System.out.println("Activando la tarea: "+tarea1.getTitle());
+            System.out.println("la tarea: -"+tarea1.getTitle()+"- se encuentra desactiva.");
+            System.out.println("Activando la tarea: -"+tarea1.getTitle()+"-");
             tarea1.setActive(true);
         }
 
         if(tarea1.isActive()){
-            System.out.println("la tarea: "+tarea1.getTitle()+" se encuentra ahora ACTIVA.");
+            System.out.println("la tarea: -"+tarea1.getTitle()+"- se encuentra ahora ACTIVA.");
         }
 
         //Prueba de metodo getStartTime con tarea no repetitiva
-        System.out.println("La tarea: "+tarea1.getTitle()+" será ejecutada a las "+tarea1.getStartTime()+" hrs.");
+        System.out.println("La tarea: -"+tarea1.getTitle()+"- será ejecutada a las "+tarea1.getStartTime()+" hrs.");
 
         //Prueba de metodo getEndTime con tarea no repetitiva
-        System.out.println("La tarea: "+tarea1.getTitle()+" termina a las "+tarea1.getEndTime()+ "hrs");
+        System.out.println("La tarea: -"+tarea1.getTitle()+"- termina a las "+tarea1.getEndTime()+ "hrs");
 
         //Prueba de metodo getRepeateInterval con tarea no repetitiva
-        System.out.println("La tarea "+tarea1.getTitle()+" tiene un intervalo de repeticion de: "+tarea1.getRepeatInterval()+" hrs.");
+        System.out.println("La tarea -"+tarea1.getTitle()+"- tiene un intervalo de repeticion de: "+tarea1.getRepeatInterval()+" hrs.");
 
         //Prueba de metodo setTime repetitivo con tarea no repetitiva
         if(tarea1.isRepeated()){
@@ -78,18 +80,14 @@ public class Main {
         }
 
         //Prueba de metodo nextTimeAfter
-        System.out.println("El tiempo actual de la tarea es: "+tarea1.current);
+        System.out.println("El tiempo actual es: "+current);
+        System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea1.getTitle()+"- es: "+tarea1.nextTimeAfter(current));
 
-        tarea1.current = tarea1.nextTimeAfter(tarea1.current);
-        System.out.println("El siguiente tiempo de ejecución es: "+tarea1.current);
-
-        tarea1.current = tarea1.nextTimeAfter(tarea1.current);
-        System.out.println("El siguiente tiempo de ejecución es: "+tarea1.current);
 
         Task tarea2 = new Task("Avanzar tesis",30);
 
-        tarea2.current = tarea2.nextTimeAfter(tarea2.current);
-        System.out.println("El siguiente tiempo de ejecución de la tarea: "+tarea2.getTitle()+" es "+tarea2.current);
+        //tarea2.setActive(true);
+        System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea2.getTitle()+"- no repetitiva es "+tarea2.nextTimeAfter(current));
 
 
         System.out.println("");
@@ -97,36 +95,39 @@ public class Main {
         System.out.println("");
 
 
-
         ArrayTaskList arrayOfTasks = new ArrayTaskList();                                                       //Declaración de objeto arregloDeTareas del tipo ArrayTaskList
 
-        Task tempTask;                                                                                          //Creación de nuevo objeto tarea temporal para obtener tareas agregadas al arreglo.
-
         arrayOfTasks.add(tarea2);                                                                               //Agregando la tarea2 previamente creada al arreglo de tareas
-        tempTask = arrayOfTasks.getTask(0);                                                               //Obteniendo la tarea recien agregada al arreglo
-        System.out.println("La tarea agregada de nombre: -"+tempTask.getTitle()+"- tiene índice: "+arrayOfTasks.index);
-        System.out.println("El tamaño del arreglo de objetos es: "+arrayOfTasks.size());
+        System.out.println("La tarea agregada de nombre: -"+arrayOfTasks.getTask(0).getTitle()+"- tiene índice: "+arrayOfTasks.index);  //Obteniendo la tarea recien agregada al arreglo
+        System.out.println("El tamaño del arreglo geeral de tareas es: "+arrayOfTasks.size());
 
         arrayOfTasks.add(tarea1);                                                                               //Agregando la tarea1 previamente creada al arreglo de tareas
-        tempTask = arrayOfTasks.getTask(1);                                                               //Obteniendo la tarea recien agregada al arreglo
-        System.out.println("La tarea agregada de nombre: -"+tempTask.getTitle()+"- tiene índice: "+arrayOfTasks.index);
-        System.out.println("El tamaño del arreglo de objetos es: "+arrayOfTasks.size());
+        System.out.println("La tarea agregada de nombre: -"+arrayOfTasks.getTask(1).getTitle()+"- tiene índice: "+arrayOfTasks.index);  //Obteniendo la tarea recien agregada al arreglo
+        System.out.println("El tamaño del arreglo general de tareas es: "+arrayOfTasks.size());
 
-        if (arrayOfTasks.remove(tarea2)){                                                                       //Eliminando y comprobando que la tarea2 con indice 0 fue eliminada desplazando las tareas subsiguientes al indice que quedó libre y poder acortar el tamaño del arreglo.
+        /*if (arrayOfTasks.remove(tarea2)){                                                                       //Eliminando y comprobando que la tarea2 con indice 0 fue eliminada desplazando las tareas subsiguientes al indice que quedó libre y poder acortar el tamaño del arreglo.
                 System.out.println("La tarea fue eliminada, el tamaño del arreglo es: "+arrayOfTasks.size());
             }else{
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
+        }*/
+
+        for(Task temp : arrayOfTasks.arrayTask){
+                System.out.println("Tarea que se encuentra en el arreglo general de tareas: -"+ temp.getTitle()+"-"); //Obteniendo todas las tareas que están en el arreglo
         }
+        System.out.println("El tamaño del arreglo general de tareas es: "+arrayOfTasks.size());
 
-        tempTask = arrayOfTasks.getTask(arrayOfTasks.index);                                                    //Obteniendo la última tarea que quedó en el arreglo
-        System.out.println("La tarea con indice: "+(arrayOfTasks.index)+" es: -"+ tempTask.getTitle()+"-");
-        System.out.println("El tamaño del arreglo de objetos es: "+arrayOfTasks.size());
 
-        if (arrayOfTasks.remove(tarea1)){                                                                       //Eliminando y comprobando que la tarea1 con indice 0 (antes indice 1) fue eliminada.
+        /*if (arrayOfTasks.remove(tarea1)){                                                                       //Eliminando y comprobando que la tarea1 con indice 0 (antes indice 1) fue eliminada.
                 System.out.println("La tarea fue eliminada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }else{
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
+        }*/
+
+
+        for(Task temp : arrayOfTasks.incoming(15,50)){                                                            //Recorriendo el arreglo obtenido del método incoming
+                System.out.println("Tarea activa del arreglo por ejecutar: -"+temp.getTitle()+"-");          //Imprimiendo el título de cada tarea que está por ejecutarse dentro del rango establecido.
         }
+
 	}
 	/*
 	public static String loDejanEntrarAlBar(int laEdad){

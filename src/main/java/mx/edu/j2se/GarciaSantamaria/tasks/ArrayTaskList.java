@@ -4,11 +4,14 @@ import java.util.Arrays;
 
 public class ArrayTaskList {
 
-    //Histórico del índice del arreglo
+    //Histórico del índice del arreglo.
     public int index = -1;
 
-    //Declaración del arreglo de tareas
-    Task arrayTask[] = new Task[0];
+    //Declaración del arreglo de tareas.
+    Task[] arrayTask = new Task[0];
+
+    //Declaración del arreglo de tareas por ejecutar.
+    Task[] arrayOfScheduleTasks = new Task[0];
 
     //Metodo que agrega una tarea en especifico al arreglo de tareas.
     public void add(Task task){
@@ -56,5 +59,24 @@ public class ArrayTaskList {
         }else{
             return arrayTask[index];
         }
+    }
+
+
+    public Task[] incoming(int from, int to){
+        //Índice temporal
+        int tempIndex = -1;
+        if(this.arrayTask.length != 0){
+            for (Task temp : this.arrayTask){
+
+                if (temp.active &&((temp.time >= from && temp.time <= to && temp.interval == 0)||((temp.start >= from || temp.end <= to) && temp.interval != 0))){
+                    tempIndex++;
+                    arrayOfScheduleTasks = Arrays.copyOf(arrayOfScheduleTasks, tempIndex+1);    //Se crea copia del arreglo en un arreglo del mismo nombre pero con diferente longitud.
+                    arrayOfScheduleTasks [tempIndex] = temp;
+                }
+            }
+        }else{
+            System.out.println("El arreglo de tareas se encuentra vacío");
+        }
+        return arrayOfScheduleTasks;
     }
 }
