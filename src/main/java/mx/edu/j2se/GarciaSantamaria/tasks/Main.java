@@ -1,8 +1,9 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
+import java.util.Scanner;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		/*Persona estudianteNC = new Persona();					//Creación de nuevo objeto
 		estudianteNC.setEdad(18);								//Asignación de la edad a la persona estudianteNC
@@ -29,8 +30,11 @@ public class Main {
 		}*/
 
         int current = 15;
+        int exit = 0;
 
-        Task tarea1 = new Task("Estudiar",20);  //Creacion de nuevo objeto tarea1
+        Scanner myObject = new Scanner(System.in);
+
+        Task tarea1 = new Task("jhvhvh",20, 30, 0);  //Creacion de nuevo objeto tarea1
 
         //Prueba de metodo getTitle y getTime
         System.out.println("La tarea: -"+tarea1.getTitle()+"- será ejecutada a las "+tarea1.getTime()+" hrs.");
@@ -86,7 +90,7 @@ public class Main {
 
         Task tarea2 = new Task("Avanzar tesis",30);
 
-        //tarea2.setActive(true);
+        //tarea1.setActive(false);
         System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea2.getTitle()+"- no repetitiva es "+tarea2.nextTimeAfter(current));
 
 
@@ -99,7 +103,7 @@ public class Main {
 
         arrayOfTasks.add(tarea2);                                                                               //Agregando la tarea2 previamente creada al arreglo de tareas
         System.out.println("La tarea agregada de nombre: -"+arrayOfTasks.getTask(0).getTitle()+"- tiene índice: "+arrayOfTasks.index);  //Obteniendo la tarea recien agregada al arreglo
-        System.out.println("El tamaño del arreglo geeral de tareas es: "+arrayOfTasks.size());
+        System.out.println("El tamaño del arreglo general de tareas es: "+arrayOfTasks.size());
 
         arrayOfTasks.add(tarea1);                                                                               //Agregando la tarea1 previamente creada al arreglo de tareas
         System.out.println("La tarea agregada de nombre: -"+arrayOfTasks.getTask(1).getTitle()+"- tiene índice: "+arrayOfTasks.index);  //Obteniendo la tarea recien agregada al arreglo
@@ -123,11 +127,70 @@ public class Main {
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }*/
 
-
         for(Task temp : arrayOfTasks.incoming(15,50)){                                                            //Recorriendo el arreglo obtenido del método incoming
                 System.out.println("Tarea activa del arreglo por ejecutar: -"+temp.getTitle()+"-");          //Imprimiendo el título de cada tarea que está por ejecutarse dentro del rango establecido.
         }
 
+        do{
+                System.out.println("Ingrese el valor numérico de la acción que desea ejecutar del menú:");
+                System.out.println("A. Ver todas las tareas");
+                System.out.println("B. Visualizar una tarea");
+                System.out.println("C. Ver las tareas que estan por ejecutarse");
+                System.out.println("D. Ver el número de tareas que están programadas");
+                System.out.println("E. Programar o agregar nueva tarea");
+                System.out.println("F. Reprogramar tarea existente");
+                System.out.println("G. Borrar tarea");
+                System.out.println("H. Activar/Desactivar una tarea");
+                System.out.println("I. Obtener el estado activo/desactivo de una tarea");
+                System.out.println("J. Verificar si una tarea es repetitiva");
+                System.out.println("K. Obtener el siguiente tiempo de ejecución de una tarea");
+                System.out.println("L. Salir");
+                String option = myObject.nextLine();
+
+                switch (option){
+                        case "A":{
+                                System.out.println("Opción 1. Ver todas las tareas");
+                                //continue();//
+                        }
+                        case "B":{
+                                System.out.println("2. Visualizar una tarea");
+                        }
+                        case "C":{
+                                System.out.println("3. Ver las tareas que estan por ejecutarse");
+                        }
+                        case "D":{
+                                System.out.println("4. Ver el número de tareas que están programadas");
+                        }
+                        case "E":{
+                                System.out.println("5. Programar o agregar nueva tarea");
+                        }
+                        case "F":{
+                                System.out.println("6. Reprogramar tarea existente");
+                        }
+                        case "G":{
+                                System.out.println("7. Borrar tarea");
+                        }
+                        case "H":{
+                                System.out.println("8. Activar/Desactivar una tarea");
+                        }
+                        case "I":{
+                                System.out.println("9. Obtener el estado activo/desactivo de una tarea");
+                        }
+                        case "J":{
+                                System.out.println("10. Verificar si una tarea es repetitiva");
+                        }
+                        case "K":{
+                                System.out.println("11. Obtener el siguiente tiempo de ejecución de una tarea");
+                        }
+                        case "L":{
+                                System.out.println("SALIENDO");
+                                exit = 1;
+                        }
+                        default:{
+                                System.out.println("Seleccione una opcion válida");
+                        }
+                }
+        }while(exit == 0);
 	}
 	/*
 	public static String loDejanEntrarAlBar(int laEdad){

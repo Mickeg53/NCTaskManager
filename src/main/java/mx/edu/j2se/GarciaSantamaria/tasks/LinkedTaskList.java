@@ -2,7 +2,8 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
 
-public class ArrayTaskList {
+public class LinkedTaskList {
+
 
     //Histórico del índice del arreglo.
     public int index = -1;
@@ -27,16 +28,16 @@ public class ArrayTaskList {
         int indexTemp1 = 0;
         int indexTemp2 = index;
         boolean status = false;
-        
+
         for (Task temp : arrayTask){
-               if(task == temp){                                    //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
-                   indexTemp1++;                                    //Adelanto una posición del indice
-                   index--;                                         //Esto quiere decir que el indice original del arreglo tiene que disminuir.
-               }else{
-                   arrayTask[indexTemp] = arrayTask[indexTemp1];    //Recorriendo la tarea siguiente al indice donde fue eliminada la tarea. Sí la tarea no se encuentra simplemente se copian las tareas en su misma posición.
-                   indexTemp++;                                     //Recorriendo a la siguiente posición.
-                   indexTemp1++;                                    //Recorriendo a la siguiente posición.
-               }
+            if(task == temp){                                    //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
+                indexTemp1++;                                    //Adelanto una posición del indice
+                index--;                                         //Esto quiere decir que el indice original del arreglo tiene que disminuir.
+            }else{
+                arrayTask[indexTemp] = arrayTask[indexTemp1];    //Recorriendo la tarea siguiente al indice donde fue eliminada la tarea. Sí la tarea no se encuentra simplemente se copian las tareas en su misma posición.
+                indexTemp++;                                     //Recorriendo a la siguiente posición.
+                indexTemp1++;                                    //Recorriendo a la siguiente posición.
+            }
         }
         arrayTask = Arrays.copyOf(arrayTask, index+1);    //Redimensionando el tamaño del arreglo en caso de que el índice original haya cambiado.
 
@@ -82,4 +83,5 @@ public class ArrayTaskList {
         }
         return arrayOfScheduleTasks;
     }
+
 }

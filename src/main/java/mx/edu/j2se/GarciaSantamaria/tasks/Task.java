@@ -1,35 +1,60 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
 
 public class Task {
-    String title;
-    int time = 0;
-    int start = 0;
-    int end = 0;
-    int interval = 0;
-    boolean active = false;
+    String title;   //Variable para guardar el título de la tarea
+    int time = 0;   //Variable para guardar el tiempo de ejecución de tareas no repetitivas
+    int start = 0;  //Variable para guardar el tiempo de inicio de tareas repetitivas
+    int end = 0;    //Variable para guardar el tiempo de término de tareas repetitivas
+    int interval = 0;   //Variable para guardar el intervalo entre ejecución de tareas repetitivas
+    boolean active = false; //Variable para guardar el estado de la tarea.
 
     //Constructor de la clase Task que será usado para construir una tarea que se encuentra deshabilitada en
     // determinado tiempo  sin repetirse
     public Task (String title, int time){
-        this.title=title;
-        this.time=time;
+        try{
+            if(time < 0){
+                throw new IllegalArgumentException();
+            }
+            if(time == 0 || title == "") {
+                throw new Exception();
+            }else{
+                    this.title=title;
+                    this.time=time;
+            }
+        }catch(IllegalArgumentException d){
+            System.out.println("***Ingrese unicamente números POSITIVOS para el campo tiempo***");
+        }catch(Exception d){
+            System.out.println("***No se pueden ingresar campos vacios***");
+        }
     }
 
     //Constructor de la clase Task que será usado para construir una tarea que se activará durante
     // un intervalos de tiempo dentro de un rango de tiempo
-    public Task (String title, int start, int end, int interval){
-        this.title=title;
-        this.interval=interval;
-        this.start=start;
-        this.end=end;
+    public Task (String title, int start, int end, int interval) throws Exception{
+        try{
+            if(start < 0 || end < 0 || interval < 0){
+                throw new IllegalArgumentException();
+            }else if(start == 0 || end == 0 || title.equals("")) {
+                throw new Exception();
+            }else if(interval == 0){
+                throw new IllegalArgumentException();
+            }else{
+                this.title=title;
+                this.interval=interval;
+                this.start=start;
+                this.end=end;
+            }
+        }catch(IllegalArgumentException d) {
+            System.out.println("***Ingrese únicamente números POSITIVOS o mayores a CERO***");
+        }catch(Exception d){
+            System.out.println("***NO se pueden ingresar campos vacios***");
+        }
     }
-
 
     //Metodos para obtener y agregar titulo a las tareas
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -79,6 +104,7 @@ public class Task {
         return interval;
     }
 
+    //Metodo para cambiar el tiempo de execución para TAREAS REPETITIVAS
     public void setTime(int start, int end, int interval){
         this.start = start;
         this.end = end;
@@ -94,7 +120,7 @@ public class Task {
     //Metodo que regresa el siguiente tiempo de ejecución en una tarea repetitiva.
     //En caso de que la tarea llegue al último intervalo de ejecución regresará "-1".
 
-    //Metodo que se ejecutará cada que la alarma de la tarea llegue al tiempo de ejecución y así actualizar el tiempo start para tareas repetitivas.
+    //Metodo que devuelve el siguiente tiempo de ejecución de tareas repetitivas.
     public int nextTimeAfter(int current){
 
         int nextTime = 0;
