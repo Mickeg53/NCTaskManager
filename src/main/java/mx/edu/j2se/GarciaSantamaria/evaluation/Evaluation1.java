@@ -29,7 +29,7 @@ public class Evaluation1 {
 
 
     }
-    public static double biggestCircle(Circle array){
+    public static double biggestCircle(Circle[] array){
         double x = 0;
         int index = -1;
         int indexFinal = 0;
@@ -43,7 +43,7 @@ public class Evaluation1 {
         return x;
     }
 
-    public static double biggestCircle(Circle array, double maxradious){
+    public static double biggestCircle(Circle[] array, double maxradious){
         double x = 0;
         int index = -1;
         int indexFinal = 0;
