@@ -2,7 +2,11 @@ package mx.edu.j2se.GarciaSantamaria.evaluation;
 
 public class Circle {
 
-    private double radius = 1;
+    private double radius;
+
+    public Circle() {
+        this.radius = 1;
+    }
 
     //Método para ingresar el radio del circulo.
     public void setRadius (double radius){
