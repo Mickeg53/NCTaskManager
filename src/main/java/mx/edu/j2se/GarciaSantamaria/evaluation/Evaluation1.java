@@ -18,17 +18,11 @@ public class Evaluation1 {
             System.out.println("*** Estimado usuario, usted a ingresado un valor inválido de radio, por favor vuelva a intentarlo ***");
         }
 
-        Circle[] arrayOfCircles = new Circle[3];
-
         circle2.setRadius(2);
-        arrayOfCircles[0]=circle2;
-
         circle3.setRadius(5);
-        arrayOfCircles[1]=circle3;
-
         circle4.setRadius(3);
-        arrayOfCircles[2]=circle4;
 
+        Circle[] arrayOfCircles = new Circle[]{circle2, circle3, circle4};
 
 
         double maxRadious = biggestCircle(arrayOfCircles);
