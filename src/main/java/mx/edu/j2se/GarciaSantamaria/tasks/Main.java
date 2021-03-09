@@ -127,10 +127,47 @@ public class Main {
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }*/
 
+
         for(Task temp : arrayOfTasks.incoming(15,50)){                                                            //Recorriendo el arreglo obtenido del método incoming
-                System.out.println("Tarea activa del arreglo por ejecutar: -"+temp.getTitle()+"-");          //Imprimiendo el título de cada tarea que está por ejecutarse dentro del rango establecido.
+                System.out.println("Tarea activa del arreglo por ejecutar en el rango de 15 a 50: -"+temp.getTitle()+"-");          //Imprimiendo el título de cada tarea que está por ejecutarse dentro del rango establecido.
         }
 
+        //PROBANDO LINKEDLIST
+
+        System.out.println("");
+        System.out.println("PRUEBA DE LINKEDLIST");
+        System.out.println("");
+
+        LinkedTaskList list = new LinkedTaskList();     //Declarando un nueva lista anidada de todas las tareas
+        LinkedTaskList incomingList;                    //Lista anidada de tareas por ejecutar
+
+        list.add(tarea1);   //Añadiendo tarea a la lista anidada
+        list.add(tarea2);   //Añadiendo tarea a la lista anidada
+        list.showList();    //Mostrando todas las tareas de la lista anidada
+
+        System.out.println("El tamaño de la lista enlazada es: "+list.size());
+
+        incomingList = list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
+
+        //Imprimiendo cada tarea que se encuentra en la lista anidada de tareas por ejecutar
+        while(incomingList.next != null){
+            System.out.println("Tarea por ejecutar guardada en una lista enlazada: "+incomingList.data.getTitle());
+            incomingList = incomingList.next;
+        }
+        System.out.println("Tarea por ejecutar guardada en una lista enlazada: "+incomingList.data.getTitle()); //Imprimiendo la ultima tarea que contiene el apuntador null.
+
+        System.out.println("El tamaño de la lista enlazada de tareas por ejecutar es: "+incomingList.size());
+
+        //Comprobando funcionamiento del método getTask
+        Task tareaLinked = null;
+        tareaLinked = list.getTask(1);
+        System.out.println("La tarea de la lista enlazada con indice 1 es: "+tareaLinked.getTitle());
+
+        //Comprobando funcionamiento de método remove
+
+        list.remove(0);
+        list.showList();
+/*
         do{
                 System.out.println("Ingrese el valor numérico de la acción que desea ejecutar del menú:");
                 System.out.println("A. Ver todas las tareas");
@@ -190,8 +227,9 @@ public class Main {
                                 System.out.println("Seleccione una opcion válida");
                         }
                 }
-        }while(exit == 0);
+        }while(exit == 0);*/
 	}
+
 	/*
 	public static String loDejanEntrarAlBar(int laEdad){
 		if(laEdad >= 18){
