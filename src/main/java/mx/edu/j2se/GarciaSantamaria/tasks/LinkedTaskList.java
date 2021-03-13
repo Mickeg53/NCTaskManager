@@ -2,75 +2,74 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
 
-public class LinkedTaskList {
+class LinkedTaskList extends AbstractTaskList{
 
-    Task data;              //Información del nodo de tipo Task
-    LinkedTaskList next;    //Campo asignado a la referencia del siguiente nodo.
-
-    private LinkedTaskList head;            //Primer nodo de la lista enlazada de todas las tareas agregadas.
-    private LinkedTaskList headIncoming;    //Primer nodo de la lista enlazada de tareas por ejecutar.
-
-
+       public Node head;
 
     //Metodo que agrega una tarea en especifico a la lista enlazada de tareas.
     public void add(Task task){
-        LinkedTaskList node = new LinkedTaskList(); //Declaracion de nuevo nodo
-        node.data = task;   //Asignando al nodo la tarea que recibe el método
-        node.next = null;   //Asignando el valor null al apuntador del siguiente nodo
+
+        Node nodo = new Node();
+        nodo.data = task;
+        nodo.next = null;
 
         if(head == null){   //Sí el primer nodo esta vacío se agrega la tarea en ese nodo.
-            head = node;
+
+            head = nodo;
+
         }else{
-            LinkedTaskList n = head;    //Lista enlazada temporal
+            Node n = head;    //Lista enlazada temporal
             while(n.next != null){      //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
                 n = n.next;             //Se recorre el nodo en cuestión
             }
-            n.next = node;              //Se guarda el nuevo nodo en el último nodo que contiene el apuntador null.
+           // Node node = new Node<Task>(); //Declaracion de nuevo nodo
+            //node.data = task;   //Asignando al nodo la tarea que recibe el método
+            //node.next = null;   //Asignando el valor null al apuntador del siguiente nodo
+            n.next = nodo;              //Se guarda el nuevo nodo en el último nodo que contiene el apuntador null.
         }
     }
 
-
     //Metodo que elimina una tarea del arreglo y regresa el booleano true si la tarea a eliminar se
     // encontraba en la lista, sí la tarea se repite, el metodo elimina cualquiera de ellas.
-    public boolean remove(int index){
-        int tempIndex = 1;      //Declaración de índice temporal
-
+    public boolean remove(Task task){
+        boolean estado = false;
         try{
-            if(index <0){       //Comprobando que el índice ingresado sea válido.
-                throw new IndexOutOfBoundsException();
-            }
-            if(index == 0){   //Sí el indice ingresado es el primer indice.
-                head = head.next;       //El primer nodo será igual al nodo siguiente
-                head.next = null;       //El apuntador del primer nodo se convierte en null y así eliminandose
-            }else{
-                LinkedTaskList n = head;    //Lista enlazada temporal
-                while(tempIndex < index ){      //mientras el indice temporal sea menor al índice ingresado
-                    n = n.next;                 //Corrimiento de nodo
-                    tempIndex++;                //Incremento del indice temporal cada vez que el nodo se recorre
+                Node n = head;    //Lista enlazada temporal
+            if(n.data != task){
+                while(n.next != null && n.next.data != task){       //mientras el indice temporal sea menor al índice ingresado
+                    n = n.next;                                     //Corrimiento de nodo
                 }
-                LinkedTaskList current = n.next;    //Lista enlazada temporal de nodo actual que se requiere borrar
+                if(n.data != task && n.next == null){
+                    estado = false;
+                }
+                Node current = n.next;    //Lista enlazada temporal de nodo actual que se requiere borrar
                 n.next = current.next;              //El apuntador del nodo siguiente apuntará al segundo siguiente nodo
                 current.next = null;                //El apuntador del siguiente nodo del nodo actual se vuelve null para asi eliminarse.
-
-                if(index > tempIndex){              //Sí el índice ingresado es mayor a el índice temporal
-                    throw new NullPointerException();   //Excepción
-                }
+            }else{
+                Node previous = n;
+                n = n.next;
+                head.data = n.data;
+                head.next = n.next;
+                previous.next = null;
             }
+            estado = true;
+
         }catch(IndexOutOfBoundsException d){
             System.out.println("El índice ingresado no es válido ya que es negativo");
         }catch(NullPointerException d){
             System.out.println("El índice ingresado no es válido ya que es mayor al número de elementos en la lista.");
         }
-        return true;
+        return estado;
     }
 
     //Metodo que regresa el número de tareas que hay en el arreglo.
     public int size(){
         int size = 0;
-        if(head == null){   //Sí existe el primer nodo.
+        Node nodeTemp = head;
+        if(nodeTemp.next == null){   //Sí existe el primer nodo.
             size = 1;       //Hay por lo menos un nodo
         }else{
-            LinkedTaskList n = head;    //Lista enlazada temporal
+            Node n = nodeTemp;    //Lista enlazada temporal
             while(n.next != null){      //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
                 n = n.next;             //Se recorre el nodo en cuestión
                 size++;                 //Aumentando el tamaño cada que se recorre el nodo.
@@ -85,15 +84,16 @@ public class LinkedTaskList {
     public Task getTask(int index){
         int tempIndex = 0;      //Declaración de índice temporal
         Task linkedTask = null; //Declaracíon de tarea temporal
+        Node nodoTemporal = head;
 
         try{
             if(index <0){                                       //Comprobando que el índice ingresado sea válido.
                 throw new IndexOutOfBoundsException();
             }
             if(index == 0){   //Sí el indice ingresado es el primer indice.
-                linkedTask = head.data;       //asignar dicha tarea a la tarea temporal
+                linkedTask = nodoTemporal.data;       //asignar dicha tarea a la tarea temporal
             }else{
-                LinkedTaskList n = head;    //Lista enlazada temporal
+                Node n = head;    //Lista enlazada temporal
                 while(n.next != null){      //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
                     n = n.next;             //Se recorre el nodo en cuestión
                     tempIndex++;                 //Aumentando el índice cada que se recorre el nodo.
@@ -116,48 +116,41 @@ public class LinkedTaskList {
     }
 
     public void showList(){
-        LinkedTaskList node = head;     //Se asigna el primer nodo de la lista a una lista anidada "node"
+        Node node = head;     //Se asigna el primer nodo de la lista a una lista anidada "node"
 
         while(node.next != null){       //Mientras no se se llegue al último nodo
             System.out.println("Tarea guardada en una lista enlazada: "+node.data.getTitle());  //Se imprime el nodo en el que se encuentre
             node = node.next;       //Se recorre al siguiente nodo
         }
         System.out.println("Tarea guardada en una lista enlazada: "+node.data.getTitle());      //Se imprime el titulo de la tarea contenida en el último nodo
+
     }
 
 
     public LinkedTaskList incoming(int from, int to){
-        LinkedTaskList nodeList = head;     //Asignando el nodo inicial de la lista anidada a una lista temporal
-
-        if(nodeList.next == null){  //Sí el apuntador inicial es nulo significa que solo hay una tarea x lo que sí corresponde a una tarea por ejecutar será asigada a headIncoming.
-            if (nodeList.data.isActive() &&((nodeList.data.time >= from && nodeList.data.time <= to && nodeList.data.interval == 0)||((nodeList.data.start >= from || nodeList.data.end <= to) && nodeList.data.interval != 0))){
-                nodeList = headIncoming;
+        Node nodeList = head;     //Asignando el nodo inicial de la lista anidada a una lista temporal
+        LinkedTaskList incoming = new LinkedTaskList();
+        if(nodeList.next == null){  //Sí el apuntador inicial es nulo significa que solo hay una tarea x lo que sí corresponde a una tarea por ejecutar será asigada a incoming.
+            if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
+                incoming.head = nodeList;
             }
         }else{
-            LinkedTaskList no = headIncoming;    //Lista enlazada temporal
             while(nodeList.next != null){           //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
-                if (nodeList.data.isActive() &&((nodeList.data.time >= from && nodeList.data.time <= to && nodeList.data.interval == 0)||((nodeList.data.start >= from || nodeList.data.end <= to) && nodeList.data.interval != 0))){
-                    LinkedTaskList nodeIncoming = new LinkedTaskList(); //Nuevo nodo de una lista enlazada
+               try{
+                   if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
 
-                    nodeIncoming.data = nodeList.data;
-                    nodeIncoming.next = null;
+                       incoming.head = nodeList;
 
-                    if(headIncoming == null){
-                        headIncoming = nodeIncoming;
-                    }else{
-                        LinkedTaskList n = headIncoming;    //Lista enlazada temporal
-                        while(n.next != null){
-                            n = n.next;
-                        }
-                        n.next = nodeIncoming;
-                    }
-                nodeList = nodeList.next;
+                   }
+               }catch(Exception e){
+
                 }
+                nodeList = nodeList.next;
             }
-            if (nodeList.data.isActive() &&((nodeList.data.time >= from && nodeList.data.time <= to && nodeList.data.interval == 0)||((nodeList.data.start >= from || nodeList.data.end <= to) && nodeList.data.interval != 0))){
-                no.next = nodeList;
+            if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
+                incoming.head = nodeList;
             }
         }
-        return headIncoming;
+        return incoming;
     }
 }

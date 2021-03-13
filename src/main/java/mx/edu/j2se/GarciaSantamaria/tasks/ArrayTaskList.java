@@ -2,7 +2,7 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList {
 
     //Histórico del índice del arreglo.
     public int index = -1;

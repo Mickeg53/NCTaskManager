@@ -90,7 +90,7 @@ public class Main {
 
         Task tarea2 = new Task("Avanzar tesis",30);
 
-        //tarea1.setActive(false);
+        tarea2.setActive(true);
         System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea2.getTitle()+"- no repetitiva es "+tarea2.nextTimeAfter(current));
 
 
@@ -149,23 +149,17 @@ public class Main {
 
         incomingList = list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
 
-        //Imprimiendo cada tarea que se encuentra en la lista anidada de tareas por ejecutar
-        while(incomingList.next != null){
-            System.out.println("Tarea por ejecutar guardada en una lista enlazada: "+incomingList.data.getTitle());
-            incomingList = incomingList.next;
-        }
-        System.out.println("Tarea por ejecutar guardada en una lista enlazada: "+incomingList.data.getTitle()); //Imprimiendo la ultima tarea que contiene el apuntador null.
+        incomingList.showList();
 
         System.out.println("El tamaño de la lista enlazada de tareas por ejecutar es: "+incomingList.size());
 
         //Comprobando funcionamiento del método getTask
         Task tareaLinked = null;
-        tareaLinked = list.getTask(1);
-        System.out.println("La tarea de la lista enlazada con indice 1 es: "+tareaLinked.getTitle());
+        tareaLinked = list.getTask(0);
+        System.out.println("La tarea de la lista enlazada con indice 0 es: "+tareaLinked.getTitle());
 
         //Comprobando funcionamiento de método remove
-
-        list.remove(0);
+        list.remove(tarea1);
         list.showList();
 /*
         do{
