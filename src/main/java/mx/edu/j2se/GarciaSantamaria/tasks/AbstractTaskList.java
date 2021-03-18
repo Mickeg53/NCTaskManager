@@ -1,6 +1,7 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
+import java.util.Iterator;
 
-public abstract class AbstractTaskList {
+public abstract class AbstractTaskList implements Iterable<Task> {
 
     public abstract void add(Task task);
 
@@ -10,8 +11,9 @@ public abstract class AbstractTaskList {
 
     public abstract Task getTask(int index);
 
-    /*public abstract Task[] incoming(int from, int to);
+    public abstract AbstractTaskList incoming(int from, int to);
 
-    public abstract LinkedTaskList incomingLinked(int from, int to);*/
+    public abstract int getIndex(Task task);
+
 
 }

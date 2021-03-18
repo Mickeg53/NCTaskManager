@@ -1,6 +1,8 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
 
-import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 class LinkedTaskList extends AbstractTaskList{
 
@@ -128,8 +130,10 @@ class LinkedTaskList extends AbstractTaskList{
 
 
     public LinkedTaskList incoming(int from, int to){
+
         Node nodeList = head;     //Asignando el nodo inicial de la lista anidada a una lista temporal
         LinkedTaskList incoming = new LinkedTaskList();
+
         if(nodeList.next == null){  //Sí el apuntador inicial es nulo significa que solo hay una tarea x lo que sí corresponde a una tarea por ejecutar será asigada a incoming.
             if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
                 incoming.head = nodeList;
@@ -152,5 +156,24 @@ class LinkedTaskList extends AbstractTaskList{
             }
         }
         return incoming;
+    }
+
+    public int getIndex(Task task){
+        int indexTemp = 0;
+        Node temp = head;
+        while(temp.next != null){
+            if(task == temp.data){                                    //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
+                return indexTemp;
+            }else{
+                indexTemp++;                                     //Recorriendo a la siguiente posición.
+                temp = temp.next;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return null;
     }
 }

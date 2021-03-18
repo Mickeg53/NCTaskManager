@@ -1,5 +1,6 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
 import java.util.Scanner;
+import java.util.Iterator;
 
 public class Main {
 	
@@ -127,10 +128,24 @@ public class Main {
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }*/
 
+        ArrayTaskList c = arrayOfTasks.incoming(15,50);
 
-        for(Task temp : arrayOfTasks.incoming(15,50)){                                                            //Recorriendo el arreglo obtenido del método incoming
+        for(int i = 0; i < c.size(); i++){
+
+                Task temp = c.getTask(i);
                 System.out.println("Tarea activa del arreglo por ejecutar en el rango de 15 a 50: -"+temp.getTitle()+"-");          //Imprimiendo el título de cada tarea que está por ejecutarse dentro del rango establecido.
+
         }
+
+        Iterator iterador = arrayOfTasks.iterator();
+
+        while (iterador.hasNext()){
+                System.out.println("Elementos de arrayOfTasks:" + iterador.next());
+                iterador.remove();
+        }
+        System.out.println("Elementos de arrayOfTasks:" + iterador.next());
+        iterador.remove();
+        System.out.println("Elementos de arrayOfTasks:" + iterador.next());
 
         //PROBANDO LINKEDLIST
 
@@ -157,6 +172,8 @@ public class Main {
         Task tareaLinked = null;
         tareaLinked = list.getTask(0);
         System.out.println("La tarea de la lista enlazada con indice 0 es: "+tareaLinked.getTitle());
+
+        System.out.println("El indice de la tarea anterior es: "+ list.getIndex(tareaLinked));
 
         //Comprobando funcionamiento de método remove
         list.remove(tarea1);

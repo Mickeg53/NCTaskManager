@@ -1,6 +1,9 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 public class ArrayTaskList extends AbstractTaskList {
 
@@ -9,9 +12,6 @@ public class ArrayTaskList extends AbstractTaskList {
 
     //Declaración del arreglo de tareas.
     Task[] arrayTask = new Task[0];
-
-    //Declaración del arreglo de tareas por ejecutar.
-    Task[] arrayOfScheduleTasks = new Task[0];
 
     //Metodo que agrega una tarea en especifico al arreglo de tareas.
     public void add(Task task){
@@ -65,16 +65,19 @@ public class ArrayTaskList extends AbstractTaskList {
     }
 
 
-    public Task[] incoming(int from, int to){
+    public ArrayTaskList incoming(int from, int to){
+        //Declaración del arreglo de tareas por ejecutar.
+        ArrayTaskList arrayOfScheduleTasks = new ArrayTaskList();
+
         //Índice temporal
         int tempIndex = -1;
         if(this.arrayTask.length != 0){
             for (Task temp : this.arrayTask){
 
                 if (temp.isActive() &&((temp.time >= from && temp.time <= to && temp.interval == 0)||((temp.start >= from || temp.end <= to) && temp.interval != 0))){
-                    tempIndex++;
-                    arrayOfScheduleTasks = Arrays.copyOf(arrayOfScheduleTasks, tempIndex+1);    //Se crea copia del arreglo en un arreglo del mismo nombre pero con diferente longitud.
-                    arrayOfScheduleTasks [tempIndex] = temp;
+
+                    arrayOfScheduleTasks.add(temp);
+
                 }
             }
         }else{
@@ -82,4 +85,58 @@ public class ArrayTaskList extends AbstractTaskList {
         }
         return arrayOfScheduleTasks;
     }
+
+    public int getIndex(Task task){
+        int indexTemp = 0;
+
+        for (Task temp : arrayTask){
+            if(task == temp){                                    //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
+               return indexTemp;
+            }else{
+                indexTemp++;                                     //Recorriendo a la siguiente posición.
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return new iterator<Task>(this);
+    }
+
+
+
+    public class iterator<Task> implements Iterator<Task>{
+        ArrayTaskList ATL;
+        int index;
+
+        public iterator(ArrayTaskList ATL){
+            this.ATL = ATL;
+            index = -1;
+        }
+
+        /*public iterator(ArrayTaskList ATL, int index){
+            this.ATL = ATL;
+            this.index = index;
+        }*/
+
+        @Override
+        public boolean hasNext() {
+            return (index < (ATL.size()-1))?true:false;
+        }
+
+        @Override
+        public Task next() {
+            if(hasNext()){
+                return (Task) ATL.arrayTask[++index];
+            }
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            ATL.remove(ATL.arrayTask[index]);
+        }
+    }
+
 }

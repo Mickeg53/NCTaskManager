@@ -136,4 +136,20 @@ public class Task {
         }
         return nextTime;
     }
+
+    public String toString(){
+        String temp;
+        if(interval == 0){
+            temp = "\n Title: "+title+
+                    "\n Time: "+time+
+                    "\n Active: "+active;
+        }else{
+            temp = "\n Title: "+title+
+                    "\n Start: "+start+
+                    "\n End: "+end+
+                    "\n Active: "+active;
+        }
+        return temp;
+    }
+
 }
