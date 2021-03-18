@@ -2,8 +2,6 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 public class ArrayTaskList extends AbstractTaskList {
 
@@ -38,10 +36,10 @@ public class ArrayTaskList extends AbstractTaskList {
                    indexTemp1++;                                    //Recorriendo a la siguiente posición.
                }
         }
-        arrayTask = Arrays.copyOf(arrayTask, index+1);    //Redimensionando el tamaño del arreglo en caso de que el índice original haya cambiado.
 
         if(indexTemp2 > index){                                     //Sí el índice original cambio y ahora es menor al índice temporal, quiere decir que una tarea fue eliminada.
             status = true;
+            arrayTask = Arrays.copyOf(arrayTask, index+1);    //Redimensionando el tamaño del arreglo en caso de que el índice original haya cambiado.
         }
         return status;
     }
@@ -71,6 +69,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
         //Índice temporal
         int tempIndex = -1;
+
         if(this.arrayTask.length != 0){
             for (Task temp : this.arrayTask){
 
@@ -81,7 +80,7 @@ public class ArrayTaskList extends AbstractTaskList {
                 }
             }
         }else{
-            System.out.println("El arreglo de tareas se encuentra vacío");
+            System.out.println("No existen tareas por ejecutar");
         }
         return arrayOfScheduleTasks;
     }
@@ -90,10 +89,10 @@ public class ArrayTaskList extends AbstractTaskList {
         int indexTemp = 0;
 
         for (Task temp : arrayTask){
-            if(task == temp){                                    //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
+            if(task == temp){           //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
                return indexTemp;
             }else{
-                indexTemp++;                                     //Recorriendo a la siguiente posición.
+                indexTemp++;            //Recorriendo a la siguiente posición.
             }
         }
         return -1;
@@ -106,7 +105,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
 
 
-    public class iterator<Task> implements Iterator<Task>{
+    public static class iterator<Task> implements Iterator<Task>{
         ArrayTaskList ATL;
         int index;
 
@@ -122,7 +121,8 @@ public class ArrayTaskList extends AbstractTaskList {
 
         @Override
         public boolean hasNext() {
-            return (index < (ATL.size()-1))?true:false;
+
+            return index < (ATL.size() - 1);
         }
 
         @Override
@@ -134,8 +134,12 @@ public class ArrayTaskList extends AbstractTaskList {
         }
 
         @Override
-        public void remove() {
+        public void remove() throws ArrayIndexOutOfBoundsException{
+            if(index < 0){
+                throw new ArrayIndexOutOfBoundsException();
+            }
             ATL.remove(ATL.arrayTask[index]);
+            index--;
         }
     }
 

@@ -144,8 +144,6 @@ public class Main {
                 iterador.remove();
         }
         System.out.println("Elementos de arrayOfTasks:" + iterador.next());
-        iterador.remove();
-        System.out.println("Elementos de arrayOfTasks:" + iterador.next());
 
         //PROBANDO LINKEDLIST
 
@@ -170,75 +168,31 @@ public class Main {
 
         //Comprobando funcionamiento del método getTask
         Task tareaLinked = null;
-        tareaLinked = list.getTask(0);
-        System.out.println("La tarea de la lista enlazada con indice 0 es: "+tareaLinked.getTitle());
+
+        try{
+                tareaLinked = list.getTask(0);
+                System.out.println("La tarea de la lista enlazada con indice 0 es: "+tareaLinked.getTitle());
+
+        }catch(IndexOutOfBoundsException d){
+                System.out.println("El índice ingresado no es válido ya que es negativo");
+        }catch(NullPointerException d){
+                System.out.println("El índice ingresado no es válido ya que es mayor al número de elementos en la lista.");
+        }
 
         System.out.println("El indice de la tarea anterior es: "+ list.getIndex(tareaLinked));
+
+        //Comprobando funcionamiento de Iterador
+        Iterator iteradorLinked = list.iterator();
+
+        while (iteradorLinked.hasNext()){
+                System.out.println("Elementos de arrayOfLinkedTasks:" + iteradorLinked.next());
+                //iteradorLinked.remove();
+        }
+        System.out.println("Elementos de arrayOfLinkedTasks:" + iteradorLinked.next());
 
         //Comprobando funcionamiento de método remove
         list.remove(tarea1);
         list.showList();
-/*
-        do{
-                System.out.println("Ingrese el valor numérico de la acción que desea ejecutar del menú:");
-                System.out.println("A. Ver todas las tareas");
-                System.out.println("B. Visualizar una tarea");
-                System.out.println("C. Ver las tareas que estan por ejecutarse");
-                System.out.println("D. Ver el número de tareas que están programadas");
-                System.out.println("E. Programar o agregar nueva tarea");
-                System.out.println("F. Reprogramar tarea existente");
-                System.out.println("G. Borrar tarea");
-                System.out.println("H. Activar/Desactivar una tarea");
-                System.out.println("I. Obtener el estado activo/desactivo de una tarea");
-                System.out.println("J. Verificar si una tarea es repetitiva");
-                System.out.println("K. Obtener el siguiente tiempo de ejecución de una tarea");
-                System.out.println("L. Salir");
-                String option = myObject.nextLine();
-
-                switch (option){
-                        case "A":{
-                                System.out.println("Opción 1. Ver todas las tareas");
-                                //continue();//
-                        }
-                        case "B":{
-                                System.out.println("2. Visualizar una tarea");
-                        }
-                        case "C":{
-                                System.out.println("3. Ver las tareas que estan por ejecutarse");
-                        }
-                        case "D":{
-                                System.out.println("4. Ver el número de tareas que están programadas");
-                        }
-                        case "E":{
-                                System.out.println("5. Programar o agregar nueva tarea");
-                        }
-                        case "F":{
-                                System.out.println("6. Reprogramar tarea existente");
-                        }
-                        case "G":{
-                                System.out.println("7. Borrar tarea");
-                        }
-                        case "H":{
-                                System.out.println("8. Activar/Desactivar una tarea");
-                        }
-                        case "I":{
-                                System.out.println("9. Obtener el estado activo/desactivo de una tarea");
-                        }
-                        case "J":{
-                                System.out.println("10. Verificar si una tarea es repetitiva");
-                        }
-                        case "K":{
-                                System.out.println("11. Obtener el siguiente tiempo de ejecución de una tarea");
-                        }
-                        case "L":{
-                                System.out.println("SALIENDO");
-                                exit = 1;
-                        }
-                        default:{
-                                System.out.println("Seleccione una opcion válida");
-                        }
-                }
-        }while(exit == 0);*/
 	}
 
 	/*
