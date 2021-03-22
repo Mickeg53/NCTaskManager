@@ -152,4 +152,24 @@ public class Task {
         return temp;
     }
 
+    public boolean equals(Object obj){
+        if(obj == null || !(obj instanceof Task)){
+            return false;
+        }
+
+        Task t = (Task) obj;
+
+        if(!t.title.equals(this.title))
+            return false;
+        if(this.time != t.time)
+            return false;
+        if(this.start != t.start)
+            return false;
+        if (this.end != t.end)
+            return false;
+        if(this.interval != t.interval)
+            return false;
+    return true;
+    }
+
 }

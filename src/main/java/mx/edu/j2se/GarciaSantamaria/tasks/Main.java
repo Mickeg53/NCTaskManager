@@ -91,7 +91,7 @@ public class Main {
 
         Task tarea2 = new Task("Avanzar tesis",30);
 
-        tarea2.setActive(true);
+        tarea2.setActive(false);
         System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea2.getTitle()+"- no repetitiva es "+tarea2.nextTimeAfter(current));
 
 
@@ -186,9 +186,8 @@ public class Main {
 
         while (iteradorLinked.hasNext()){
                 System.out.println("Elementos de arrayOfLinkedTasks:" + iteradorLinked.next());
-                //iteradorLinked.remove();
+                iteradorLinked.remove();
         }
-        System.out.println("Elementos de arrayOfLinkedTasks:" + iteradorLinked.next());
 
         //Comprobando funcionamiento de método remove
         list.remove(tarea1);

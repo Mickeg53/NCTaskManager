@@ -118,14 +118,23 @@ class LinkedTaskList extends AbstractTaskList{
                 incoming.head = nodeList;
             }
         }else{
+
             while(nodeList.next != null){           //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
                 if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
-                    incoming.head = nodeList;
+                    if(incoming.head == null){   //Sí el primer nodo esta vacío se agrega la tarea en ese nodo.
+                        incoming.head = nodeList;
+                    }else{
+                        while(incoming.head.next != null){      //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
+                            incoming.head = incoming.head.next;             //Se recorre el nodo en cuestión
+                        }
+                        incoming.head.next = nodeList;              //Se guarda el nuevo nodo en el último nodo que contiene el apuntador null.
+                    }
                 }
                 nodeList = nodeList.next;
             }
             if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
-                incoming.head = nodeList;
+               //n.next = nodeList;
+                incoming.head.next = nodeList;
             }
         }
         return incoming;
@@ -147,39 +156,81 @@ class LinkedTaskList extends AbstractTaskList{
 
     @Override
     public Iterator<Task> iterator() {
-        return new LinkedTaskList.iterator<Task>(this);
+        return new iterator<Task>(head);
     }
 
     //Clase interna del iterador de LinkedTaskList
     public class iterator<Task> implements Iterator<Task>{
-        LinkedTaskList LTL;
-        int index;
+        Node LTL;
+        Node anterior;
+        boolean viewFirst = false;
 
-        public iterator(LinkedTaskList LTL){
+        public iterator(Node LTL){
             this.LTL = LTL;
-            index = -1;
         }
 
 
         @Override
         public boolean hasNext() {
-            return (LTL.head.next != null)?true:false;
+            return (LTL.next != null)?true:false;
         }
 
         @Override
         public Task next() {
-            if(hasNext()){
-                LTL.head = LTL.head.next;
-                return (Task) LTL.head.data;
+            if(!viewFirst){
+                viewFirst = true;
+                return (Task) LTL.data;
+            }else{
+                if(hasNext()){
+                    anterior = LTL;
+                    LTL = LTL.next;
+                    return (Task) LTL.data;
+                }
             }
             return null;
         }
 
         @Override
         public void remove(){
-            LTL.remove(LTL.head.data);
+            if(!viewFirst){
+                try{
+                    if (anterior != null){
+                        anterior.next = null;
+                        anterior = null;
+                    }else{
+                        throw new IllegalStateException("Ya fue usado el metodo anteriormente");
+                    }
+                }catch(IllegalStateException ise) {
+                    System.out.println(ise.getMessage());
+                }
+            }
         }
     }
 
+    public boolean equals(Object obj){
+        if(obj == null || !(obj instanceof LinkedTaskList)){
+            return false;
+        }
 
+        LinkedTaskList t = (LinkedTaskList) obj;
+
+        Node temp1 = null;
+        Node temp2 = null;
+
+        temp1 = t.head;
+        temp2 = this.head;
+
+        if(this.size() != t.size()){
+            return false;
+        }
+
+        while(temp1.next != null){
+            if(temp2.data != temp1.data){
+                return false;
+            }
+            temp1 = temp1.next;
+            temp2 = temp2.next;
+        }
+        return true;
+    }
 }

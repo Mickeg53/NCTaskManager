@@ -143,4 +143,23 @@ public class ArrayTaskList extends AbstractTaskList {
         }
     }
 
+    public boolean equals(Object obj){
+        if(obj == null || !(obj instanceof ArrayTaskList)){
+            return false;
+        }
+
+        ArrayTaskList t = (ArrayTaskList) obj;
+
+        if(this.size() != t.size()){
+            return false;
+        }
+
+        for(int i = 0; i < t.size(); i++){
+            if(!arrayTask[i].equals(t.arrayTask[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
