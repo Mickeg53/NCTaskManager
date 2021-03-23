@@ -172,4 +172,13 @@ public class Task {
     return true;
     }
 
+    public int hashCode(){
+        int hash = 1;
+        for(int i = 0; i < title.length(); i++){
+            char c = title.charAt(i);
+            hash = hash * c;
+        }
+        return hash;
+    }
+
 }

@@ -162,4 +162,12 @@ public class ArrayTaskList extends AbstractTaskList {
         return true;
     }
 
+    public int hashCode(){
+        int hash = 0;
+        for(Task temp : arrayTask){
+            hash += temp.hashCode();
+        }
+        return hash;
+    }
+
 }

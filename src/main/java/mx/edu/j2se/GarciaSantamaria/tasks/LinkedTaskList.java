@@ -225,12 +225,23 @@ class LinkedTaskList extends AbstractTaskList{
         }
 
         while(temp1.next != null){
-            if(temp2.data != temp1.data){
+            if(!temp2.data.equals(temp1.data)){
                 return false;
             }
             temp1 = temp1.next;
             temp2 = temp2.next;
         }
         return true;
+    }
+
+    public int hashCode(){
+        int hash = 0;
+        Node temp = this.head;
+        while(temp.next != null){
+            hash += temp.data.hashCode();
+            temp = temp.next;
+        }
+        hash += temp.data.hashCode();
+        return hash;
     }
 }
