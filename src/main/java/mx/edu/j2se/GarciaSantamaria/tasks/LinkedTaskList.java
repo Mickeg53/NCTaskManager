@@ -244,4 +244,24 @@ class LinkedTaskList extends AbstractTaskList{
         hash += temp.data.hashCode();
         return hash;
     }
+
+    public String toString(){
+        String temp = "";
+        Node temp1 = this.head;
+
+        while(temp1 != null){
+            if(temp1.data.interval == 0){
+                temp += "\n\n Title: "+temp1.data.title+
+                        "\n Time: "+temp1.data.time+
+                        "\n Active: "+temp1.data.active;
+            }else{
+                temp += "\n\n Title: "+temp1.data.title+
+                        "\n Start: "+temp1.data.start+
+                        "\n End: "+temp1.data.end+
+                        "\n Active: "+temp1.data.active;
+            }
+            temp1 = temp1.next;
+        }
+        return temp;
+    }
 }

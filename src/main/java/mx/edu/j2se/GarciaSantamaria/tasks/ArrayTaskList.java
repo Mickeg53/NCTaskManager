@@ -170,4 +170,21 @@ public class ArrayTaskList extends AbstractTaskList {
         return hash;
     }
 
+    public String toString(){
+        String temp = "";
+
+        for(Task temp1 : arrayTask){
+            if(temp1.interval == 0){
+                temp += "\n\n Title: "+temp1.title+
+                        "\n Time: "+temp1.time+
+                        "\n Active: "+temp1.active;
+            }else{
+                temp += "\n\n Title: "+temp1.title+
+                        "\n Start: "+temp1.start+
+                        "\n End: "+temp1.end+
+                        "\n Active: "+temp1.active;
+            }
+        }
+        return temp;
+    }
 }
