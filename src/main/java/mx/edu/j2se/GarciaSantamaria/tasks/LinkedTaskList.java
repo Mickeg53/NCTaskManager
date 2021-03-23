@@ -121,20 +121,12 @@ class LinkedTaskList extends AbstractTaskList{
 
             while(nodeList.next != null){           //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
                 if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
-                    if(incoming.head == null){   //Sí el primer nodo esta vacío se agrega la tarea en ese nodo.
-                        incoming.head = nodeList;
-                    }else{
-                        while(incoming.head.next != null){      //Se navega por cada nodo hasta llegar al último nodo que contiene el apuntador null
-                            incoming.head = incoming.head.next;             //Se recorre el nodo en cuestión
-                        }
-                        incoming.head.next = nodeList;              //Se guarda el nuevo nodo en el último nodo que contiene el apuntador null.
-                    }
+                   incoming.add(nodeList.data);
                 }
                 nodeList = nodeList.next;
             }
             if (((Task)nodeList.data).isActive() &&((((Task)nodeList.data).time >= from && ((Task)nodeList.data).time <= to && ((Task)nodeList.data).interval == 0)||((((Task)nodeList.data).start >= from || ((Task)nodeList.data).end <= to) && ((Task)nodeList.data).interval != 0))){
-               //n.next = nodeList;
-                incoming.head.next = nodeList;
+                incoming.add(nodeList.data);
             }
         }
         return incoming;
