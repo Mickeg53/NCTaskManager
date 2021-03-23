@@ -265,4 +265,10 @@ class LinkedTaskList extends AbstractTaskList{
         }
         return temp;
     }
+
+    public LinkedTaskList cloneLinkedTaskList(){
+        LinkedTaskList tempLinkedTaskList = this;
+        return tempLinkedTaskList;
+    }
+
 }

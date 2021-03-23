@@ -188,4 +188,9 @@ public class ArrayTaskList extends AbstractTaskList {
         }
         return temp;
     }
+
+    public ArrayTaskList cloneArrayTaskList(){
+        ArrayTaskList tempArrayTaskList = this;
+        return tempArrayTaskList;
+    }
 }

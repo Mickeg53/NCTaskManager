@@ -182,4 +182,9 @@ public class Task {
         return hash;
     }
 
+    public Task cloneTask(){
+        Task tempTask = this;
+        return tempTask;
+    }
+
 }

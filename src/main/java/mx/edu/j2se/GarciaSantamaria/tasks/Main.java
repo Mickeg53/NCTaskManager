@@ -140,10 +140,10 @@ public class Main {
         Iterator iterador = arrayOfTasks.iterator();
 
         while (iterador.hasNext()){
-                System.out.println("Elementos de arrayOfTasks:" + iterador.next());
+                System.out.println("\nElementos de arrayOfTasks:" + iterador.next());
                 iterador.remove();
         }
-        System.out.println("Elementos de arrayOfTasks:" + iterador.next());
+        System.out.println("\nElementos de arrayOfTasks:" + iterador.next());
 
         //PROBANDO LINKEDLIST
 
@@ -185,7 +185,7 @@ public class Main {
         Iterator iteradorLinked = list.iterator();
 
         while (iteradorLinked.hasNext()){
-                System.out.println("Elementos de arrayOfLinkedTasks:" + iteradorLinked.next());
+                System.out.println("\n Elementos de arrayOfLinkedTasks:" + iteradorLinked.next());
                 iteradorLinked.remove();
         }
 
