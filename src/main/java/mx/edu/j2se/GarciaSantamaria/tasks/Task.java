@@ -141,13 +141,14 @@ public class Task {
         String temp;
         if(interval == 0){
             temp = "\n Title: "+title+
-                    "\n Time: "+time+
-                    "\n Active: "+active;
+                    "\t Time: "+time+
+                    "\t Active: "+active;
         }else{
             temp = "\n Title: "+title+
-                    "\n Start: "+start+
-                    "\n End: "+end+
-                    "\n Active: "+active;
+                    "\t Start: "+start+
+                    "\t End: "+end+
+                    "\t Interval: "+interval+
+                    "\t Active: "+active;
         }
         return temp;
     }

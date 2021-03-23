@@ -251,14 +251,15 @@ class LinkedTaskList extends AbstractTaskList{
 
         while(temp1 != null){
             if(temp1.data.interval == 0){
-                temp += "\n\n Title: "+temp1.data.title+
-                        "\n Time: "+temp1.data.time+
-                        "\n Active: "+temp1.data.active;
+                temp += "\n Title: "+temp1.data.title+
+                        "\t Time: "+temp1.data.time+
+                        "\t Active: "+temp1.data.active;
             }else{
-                temp += "\n\n Title: "+temp1.data.title+
-                        "\n Start: "+temp1.data.start+
-                        "\n End: "+temp1.data.end+
-                        "\n Active: "+temp1.data.active;
+                temp += "\n Title: "+temp1.data.title+
+                        "\t Start: "+temp1.data.start+
+                        "\t End: "+temp1.data.end+
+                        "\t Interval: "+temp1.data.interval+
+                        "\t Active: "+temp1.data.active;
             }
             temp1 = temp1.next;
         }

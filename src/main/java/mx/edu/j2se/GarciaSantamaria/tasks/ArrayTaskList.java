@@ -175,14 +175,15 @@ public class ArrayTaskList extends AbstractTaskList {
 
         for(Task temp1 : arrayTask){
             if(temp1.interval == 0){
-                temp += "\n\n Title: "+temp1.title+
-                        "\n Time: "+temp1.time+
-                        "\n Active: "+temp1.active;
+                temp += "\n Title: "+temp1.title+
+                        "\t Time: "+temp1.time+
+                        "\t Active: "+temp1.active;
             }else{
-                temp += "\n\n Title: "+temp1.title+
-                        "\n Start: "+temp1.start+
-                        "\n End: "+temp1.end+
-                        "\n Active: "+temp1.active;
+                temp += "\n Title: "+temp1.title+
+                        "\t Start: "+temp1.start+
+                        "\t End: "+temp1.end+
+                        "\t Interval: "+temp1.interval+
+                        "\t Active: "+temp1.active;
             }
         }
         return temp;
