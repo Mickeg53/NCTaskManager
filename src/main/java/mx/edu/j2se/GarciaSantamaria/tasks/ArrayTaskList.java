@@ -2,6 +2,7 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public class ArrayTaskList extends AbstractTaskList {
 
@@ -96,6 +97,12 @@ public class ArrayTaskList extends AbstractTaskList {
             }
         }
         return -1;
+    }
+
+    @Override
+    public Stream<Task> getStream() {
+        //Stream<Task> taskStream = this.stream()
+        return null;
     }
 
     @Override

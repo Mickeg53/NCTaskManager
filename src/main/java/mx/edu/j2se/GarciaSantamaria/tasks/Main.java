@@ -33,7 +33,7 @@ public class Main {
         int current = 15;
         int exit = 0;
 
-        Scanner myObject = new Scanner(System.in);
+        //Scanner myObject = new Scanner(System.in);
 
         Task tarea1 = new Task("jhvhvh",20, 30, 0);  //Creacion de nuevo objeto tarea1
 
@@ -116,9 +116,12 @@ public class Main {
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }*/
 
+        //arrayOfTasks.arrayTask.forEach(Task -> )
+
         for(Task temp : arrayOfTasks.arrayTask){
                 System.out.println("Tarea que se encuentra en el arreglo general de tareas: -"+ temp.getTitle()+"-"); //Obteniendo todas las tareas que están en el arreglo
         }
+
         System.out.println("El tamaño del arreglo general de tareas es: "+arrayOfTasks.size());
 
 

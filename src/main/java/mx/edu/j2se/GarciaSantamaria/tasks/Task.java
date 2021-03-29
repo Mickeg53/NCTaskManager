@@ -10,7 +10,7 @@ public class Task {
 
     //Constructor de la clase Task que será usado para construir una tarea que se encuentra deshabilitada en
     // determinado tiempo  sin repetirse
-    public Task (String title, int time){
+    public Task (String title, int time) throws Exception{
         try{
             if(time < 0){
                 throw new IllegalArgumentException();
@@ -24,7 +24,7 @@ public class Task {
         }catch(IllegalArgumentException d){
             System.out.println("***Ingrese unicamente números POSITIVOS para el campo tiempo***");
         }catch(Exception d){
-            System.out.println("***No se pueden ingresar campos vacios***");
+            System.out.println("***No se pueden ingresar campos vacios o igual a cero***");
         }
     }
 
@@ -32,12 +32,14 @@ public class Task {
     // un intervalos de tiempo dentro de un rango de tiempo
     public Task (String title, int start, int end, int interval) throws Exception{
         try{
-            if(start < 0 || end < 0 || interval < 0){
+            if(start < 0 || end < 0){
                 throw new IllegalArgumentException();
-            }else if(start == 0 || end == 0 || title.equals("")) {
+            }else if(title.equals("")) {
                 throw new Exception();
-            }else if(interval == 0){
-                throw new IllegalArgumentException();
+            }else if((end-start) < 0) {
+                throw new IndexOutOfBoundsException();
+            }else if((interval <= 0)) {
+                throw new IllegalStateException();
             }else{
                 this.title=title;
                 this.interval=interval;
@@ -46,8 +48,12 @@ public class Task {
             }
         }catch(IllegalArgumentException d) {
             System.out.println("***Ingrese únicamente números POSITIVOS o mayores a CERO***");
+        }catch(IndexOutOfBoundsException f){
+            System.out.println("***El tiempo de término no puede ser menor al tiempo de inicio***");
+        }catch(IllegalStateException g){
+            System.out.println("***El tiempo de intervalo es inválido***");
         }catch(Exception d){
-            System.out.println("***NO se pueden ingresar campos vacios***");
+            System.out.println("***NO se pueden ingresar campos vacios o iguales a cero***");
         }
     }
 
@@ -55,8 +61,17 @@ public class Task {
     public String getTitle() {
         return title;
     }
-    public void setTitle(String title) {
-        this.title = title;
+
+    public void setTitle(String title) throws Exception {
+        try{
+            if(title == "" || title == " "|| title == "  "){
+                throw new IllegalStateException();
+            }else{
+                this.title = title;
+            }
+        }catch(IllegalStateException d){
+            System.out.println("***Ingrese un título válido***");
+        }
     }
 
     //Metodo para leer y modificar el estatus de la tarea (activa o inactiva)
@@ -78,13 +93,46 @@ public class Task {
 
     //Metodo para agregar un tiempo de ejecución de la tarea y volverla no repetitiva si se
     // trata de una tarea repetitiva
-    public void setTime(int time){
-        if (this.interval != 0){    //Si la tarea es repetitiva
-            this.start = 0;
-            this.end = 0;
-            this.interval = 0;
+    public void setTime(int time) throws Exception{
+        try{
+            if (this.interval != 0){    //Si la tarea es repetitiva
+                this.start = 0;
+                this.end = 0;
+                this.interval = 0;
+            }else if(time <= 0){
+                throw new IllegalArgumentException();
+            }
+            this.time=time;
+        }catch (IllegalArgumentException d){
+            System.out.println("***Ingrese un valor de tiempo válido***");
         }
-        this.time=time;
+
+    }
+
+    //Metodo para cambiar el tiempo de execución para TAREAS REPETITIVAS
+    public void setTime(int start, int end, int interval) throws Exception{
+        try{
+            if(start < 0 || end < 0){
+                throw new IllegalArgumentException();
+            }else if((end-start) < 0) {
+                throw new IndexOutOfBoundsException();
+            }else if((interval <= 0)) {
+                throw new IllegalStateException();
+            }else{
+                this.start = start;
+                this.end = end;
+                this.interval = interval;
+                this.time = 0;
+            }
+        }catch(IllegalArgumentException d) {
+            System.out.println("***Ingrese únicamente números POSITIVOS o mayores a CERO***");
+        }catch(IndexOutOfBoundsException f){
+            System.out.println("***El tiempo de término no puede ser menor al tiempo de inicio***");
+        }catch(IllegalStateException g){
+            System.out.println("***El tiempo de intervalo es inválido***");
+        }catch(Exception d){
+            System.out.println("***NO se pueden ingresar campos vacios o iguales a cero***");
+        }
     }
 
     //Metodos para leer y cambiar el tiempo de execución para TAREAS REPETITIVAS
@@ -104,14 +152,6 @@ public class Task {
         return interval;
     }
 
-    //Metodo para cambiar el tiempo de execución para TAREAS REPETITIVAS
-    public void setTime(int start, int end, int interval){
-        this.start = start;
-        this.end = end;
-        this.interval = interval;
-        this.time = 0;
-    }
-
     //Metodo para consultar si una tarea es repetitiva
     public boolean isRepeated(){
         return this.interval != 0;  //Sí el intervalo es diferente de 0 significa que es una tarea repetitiva
@@ -121,20 +161,31 @@ public class Task {
     //En caso de que la tarea llegue al último intervalo de ejecución regresará "-1".
 
     //Metodo que devuelve el siguiente tiempo de ejecución de tareas repetitivas.
-    public int nextTimeAfter(int current){
+    public int nextTimeAfter(int current) throws Exception{
+        try{
+            if(current < 0) {
+                throw new IllegalArgumentException();
+            }
+            int nextTime = 0;
 
-        int nextTime = 0;
-
-        if((this.interval != 0 && (this.end - current) <= 0 )||(this.interval == 0 && (this.time - current <= 0))){
-            nextTime = -1;
-        }else if(this.interval != 0){
-            int numOfIntervals = (this.end-this.start)/interval;
-            numOfIntervals = (current-(current%this.interval))/this.interval;
-            nextTime = (numOfIntervals+1)*this.interval;
-        }else if(this.interval == 0){
-            nextTime = this.time;
+            if(this.active){
+                if((this.interval != 0 && (this.end - current) <= 0 )||(this.interval == 0 && (this.time - current <= 0))){
+                    nextTime = -1;
+                }else if(this.interval != 0){
+                    int numOfIntervals = (this.end-this.start)/interval;
+                    numOfIntervals = (current-(current%this.interval))/this.interval;
+                    nextTime = (numOfIntervals+1)*this.interval;
+                }else if(this.interval == 0){
+                    nextTime = this.time;
+                }
+                return nextTime;
+            }else{
+                return -1;
+            }
+        }catch (IllegalArgumentException d){
+            System.out.println("***Tiempo current inválido***");
         }
-        return nextTime;
+        return -1;
     }
 
     public String toString(){

@@ -1,5 +1,6 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 public abstract class AbstractTaskList implements Iterable<Task> {
 
@@ -14,6 +15,10 @@ public abstract class AbstractTaskList implements Iterable<Task> {
     public abstract AbstractTaskList incoming(int from, int to);
 
     public abstract int getIndex(Task task);
+    
+    public abstract Stream<Task> getStream();
+
+
 
 
 }
