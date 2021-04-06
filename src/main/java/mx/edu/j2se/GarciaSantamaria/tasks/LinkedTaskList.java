@@ -3,7 +3,7 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-class LinkedTaskList extends AbstractTaskList{
+public class LinkedTaskList extends AbstractTaskList{
 
        public Node head;
 
@@ -42,9 +42,14 @@ class LinkedTaskList extends AbstractTaskList{
         }else{
             Node previous = n;
             n = n.next;
-            head.data = n.data;
-            head.next = n.next;
-            previous.next = null;
+            if(head.next != null){
+                head.data = n.data;
+                head.next = n.next;
+                previous.next = null;
+            }else{
+                head.data = null;
+                head.next = null;
+            }
         }
         return true;
     }
@@ -137,12 +142,15 @@ class LinkedTaskList extends AbstractTaskList{
         int indexTemp = 0;
         Node temp = head;
         while(temp.next != null){
-            if(task == temp.data){          //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
+            if(temp.data == task){          //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
                 return indexTemp;
             }else{
                 indexTemp++;                //Recorriendo a la siguiente posición.
                 temp = temp.next;
             }
+        }
+        if(temp.data == task){          //Sí la tarea obtenida del arreglo es igual a la tarea que busco.
+            return indexTemp;
         }
         return -1;
     }

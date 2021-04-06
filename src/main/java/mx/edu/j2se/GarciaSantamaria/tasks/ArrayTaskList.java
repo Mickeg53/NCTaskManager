@@ -101,12 +101,12 @@ public class ArrayTaskList extends AbstractTaskList {
 
     @Override
     public Stream<Task> getStream() {
-        //Stream<Task> taskStream = this.stream()
-        return null;
+        return Arrays.stream(arrayTask);
     }
 
     @Override
     public Iterator<Task> iterator() {
+
         return new iterator<Task>(this);
     }
 
@@ -120,11 +120,6 @@ public class ArrayTaskList extends AbstractTaskList {
             this.ATL = ATL;
             index = -1;
         }
-
-        /*public iterator(ArrayTaskList ATL, int index){
-            this.ATL = ATL;
-            this.index = index;
-        }*/
 
         @Override
         public boolean hasNext() {

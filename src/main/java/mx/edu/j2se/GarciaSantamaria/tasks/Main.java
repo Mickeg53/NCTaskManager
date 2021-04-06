@@ -159,6 +159,8 @@ public class Main {
 
         list.add(tarea1);   //Añadiendo tarea a la lista anidada
         list.add(tarea2);   //Añadiendo tarea a la lista anidada
+        list.add(tarea2);   //Añadiendo tarea a la lista anidada
+
         list.showList();    //Mostrando todas las tareas de la lista anidada
 
         System.out.println("El tamaño de la lista enlazada es: "+list.size());
@@ -193,7 +195,7 @@ public class Main {
         }
 
         //Comprobando funcionamiento de método remove
-        list.remove(tarea1);
+        list.remove(tarea2);
         list.showList();
 	}
 
