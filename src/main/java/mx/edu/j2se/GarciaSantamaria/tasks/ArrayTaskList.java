@@ -64,7 +64,7 @@ public class ArrayTaskList extends AbstractTaskList {
     }
 
 
-    public ArrayTaskList incoming(int from, int to){
+    /*public ArrayTaskList incoming(int from, int to){
         //Declaración del arreglo de tareas por ejecutar.
         ArrayTaskList arrayOfScheduleTasks = new ArrayTaskList();
 
@@ -84,7 +84,7 @@ public class ArrayTaskList extends AbstractTaskList {
             System.out.println("No existen tareas por ejecutar");
         }
         return arrayOfScheduleTasks;
-    }
+    }*/
 
     public int getIndex(Task task){
         int indexTemp = 0;

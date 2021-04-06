@@ -1,6 +1,8 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class LinkedTaskList extends AbstractTaskList{
@@ -114,7 +116,7 @@ public class LinkedTaskList extends AbstractTaskList{
     }
 
 
-    public LinkedTaskList incoming(int from, int to){
+    /*public LinkedTaskList incoming(int from, int to){
 
         Node nodeList = head;           //Asignando el nodo inicial de la lista anidada a una lista temporal
         LinkedTaskList incoming = new LinkedTaskList();
@@ -136,7 +138,7 @@ public class LinkedTaskList extends AbstractTaskList{
             }
         }
         return incoming;
-    }
+    }*/
 
     public int getIndex(Task task){
         int indexTemp = 0;
@@ -157,7 +159,17 @@ public class LinkedTaskList extends AbstractTaskList{
 
     @Override
     public Stream<Task> getStream() {
-        return null;
+        Node headTemp = head;
+
+        List<Task> list = null;
+
+        while(headTemp.next != null){
+            assert false;
+            list.add(headTemp.data);
+        }
+
+        assert false;
+        return list.stream();
     }
 
     @Override

@@ -81,12 +81,12 @@ public class ArrayTaskList_Tests {
         tarea1.setActive(true);
         tarea2.setActive(true);
 
-        ArrayTaskList c = arrayOfTasks.incoming(15,50);
+        ArrayTaskList c = (ArrayTaskList) arrayOfTasks.incoming(15,50);
 
         Assert.assertEquals(tarea1,c.getTask(0));
         Assert.assertEquals(tarea2,c.getTask(1));
 
-        ArrayTaskList d = arrayOfTasks.incoming(21,50);
+        ArrayTaskList d = (ArrayTaskList) arrayOfTasks.incoming(21,50);
 
         Assert.assertEquals(tarea2,d.getTask(0));
     }

@@ -131,7 +131,7 @@ public class Main {
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }*/
 
-        ArrayTaskList c = arrayOfTasks.incoming(15,50);
+        ArrayTaskList c = (ArrayTaskList) arrayOfTasks.incoming(15,50);
 
         for(int i = 0; i < c.size(); i++){
 
@@ -165,7 +165,7 @@ public class Main {
 
         System.out.println("El tamaño de la lista enlazada es: "+list.size());
 
-        incomingList = list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
+        incomingList = (LinkedTaskList) list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
 
         incomingList.showList();
 

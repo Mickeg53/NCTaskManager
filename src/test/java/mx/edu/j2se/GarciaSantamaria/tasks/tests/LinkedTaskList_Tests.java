@@ -91,7 +91,7 @@ public class LinkedTaskList_Tests {
         tarea1.setActive(true);
         tarea2.setActive(true);
 
-        incomingList = list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
+        incomingList = (LinkedTaskList) list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
 
         Assert.assertEquals(tarea1, incomingList.getTask(0));
         Assert.assertEquals(tarea2, incomingList.getTask(1));
