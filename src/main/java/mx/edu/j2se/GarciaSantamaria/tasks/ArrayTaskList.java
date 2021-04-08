@@ -101,6 +101,7 @@ public class ArrayTaskList extends AbstractTaskList {
 
     @Override
     public Stream<Task> getStream() {
+
         return Arrays.stream(arrayTask);
     }
 

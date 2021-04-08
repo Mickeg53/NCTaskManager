@@ -2,6 +2,7 @@ package mx.edu.j2se.GarciaSantamaria.tasks;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -161,14 +162,12 @@ public class LinkedTaskList extends AbstractTaskList{
     public Stream<Task> getStream() {
         Node headTemp = head;
 
-        List<Task> list = null;
+        List<Task> list = new LinkedList();
 
         while(headTemp.next != null){
-            assert false;
             list.add(headTemp.data);
+            headTemp = headTemp.next;
         }
-
-        assert false;
         return list.stream();
     }
 
