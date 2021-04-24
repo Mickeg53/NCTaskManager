@@ -1,4 +1,5 @@
 package mx.edu.j2se.GarciaSantamaria.tasks;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.Iterator;
 
@@ -30,12 +31,9 @@ public class Main {
 			System.out.println("NO SE HA INGRESADO LA NACIONALIDAD DE " + estudianteNC2.getNombre());
 		}*/
 
-        int current = 15;
-        int exit = 0;
+        LocalDateTime current = LocalDateTime.now();
 
-        //Scanner myObject = new Scanner(System.in);
-
-        Task tarea1 = new Task("jhvhvh",20, 30, 0);  //Creacion de nuevo objeto tarea1
+        Task tarea1 = new Task("jhvhvh",LocalDateTime.parse("2021-04-15T13:00:00"), LocalDateTime.parse("2021-04-15T16:00:00"), 0);  //Creacion de nuevo objeto tarea1
 
         //Prueba de metodo getTitle y getTime
         System.out.println("La tarea: -"+tarea1.getTitle()+"- será ejecutada a las "+tarea1.getTime()+" hrs.");
@@ -44,7 +42,7 @@ public class Main {
         tarea1.setTitle("Estudiar JAVA");
 
         //Prueba de metodo setTime(int time)
-        tarea1.setTime(30);
+        tarea1.setTime(LocalDateTime.parse("2021-04-15T15:00:00"));
         System.out.println("La tarea: -"+tarea1.getTitle()+"- será ejecutada a las "+tarea1.getTime()+" hrs.");
 
         //Prueba de metodo isActive y setActive
@@ -76,7 +74,7 @@ public class Main {
             System.out.println("La tarea: "+ tarea1.getTitle()+" es una tarea no repetitiva");
         }
 
-        tarea1.setTime(10, 30, 10);
+        tarea1.setTime(LocalDateTime.parse("2021-04-15T14:00:00"), LocalDateTime.parse("2021-04-15T16:00:00"), 1);
 
         if(tarea1.isRepeated()){
             System.out.println("La tarea: "+ tarea1.getTitle()+" es una tarea repetitiva");
@@ -89,7 +87,7 @@ public class Main {
         System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea1.getTitle()+"- es: "+tarea1.nextTimeAfter(current));
 
 
-        Task tarea2 = new Task("Avanzar tesis",30);
+        Task tarea2 = new Task("Avanzar tesis",LocalDateTime.parse("2021-04-15T16:00:00"));
 
         tarea2.setActive(false);
         System.out.println("El siguiente tiempo de ejecución de la tarea: -"+tarea2.getTitle()+"- no repetitiva es "+tarea2.nextTimeAfter(current));
@@ -131,7 +129,7 @@ public class Main {
                 System.out.println("Tarea no encontrada, el tamaño del arreglo es: "+arrayOfTasks.size());
         }*/
 
-        ArrayTaskList c = (ArrayTaskList) arrayOfTasks.incoming(15,50);
+        ArrayTaskList c = (ArrayTaskList) arrayOfTasks.incoming(LocalDateTime.parse("2021-04-15T14:30:00"),LocalDateTime.parse("2021-04-15T18:00:00"));
 
         for(int i = 0; i < c.size(); i++){
 
@@ -165,7 +163,7 @@ public class Main {
 
         System.out.println("El tamaño de la lista enlazada es: "+list.size());
 
-        incomingList = (LinkedTaskList) list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
+        incomingList = (LinkedTaskList) list.incoming(LocalDateTime.parse("2021-04-15T14:30:00"), LocalDateTime.parse("2021-04-15T18:00:00"));   //Obteniendo las tareas que están por ejecutarse en una lista anidada
 
         incomingList.showList();
 

@@ -99,7 +99,6 @@ public class ArrayTaskList extends AbstractTaskList {
         return -1;
     }
 
-    @Override
     public Stream<Task> getStream() {
 
         return Arrays.stream(arrayTask);
@@ -177,15 +176,15 @@ public class ArrayTaskList extends AbstractTaskList {
         String temp = "";
 
         for(Task temp1 : arrayTask){
-            if(temp1.interval == 0){
-                temp += "\n Title: "+temp1.title+
-                        "\t Time: "+temp1.time+
-                        "\t Active: "+temp1.active;
-            }else{
+            if(temp1.repetitive){
                 temp += "\n Title: "+temp1.title+
                         "\t Start: "+temp1.start+
                         "\t End: "+temp1.end+
                         "\t Interval: "+temp1.interval+
+                        "\t Active: "+temp1.active;
+            }else{
+                temp += "\n Title: "+temp1.title+
+                        "\t Time: "+temp1.time+
                         "\t Active: "+temp1.active;
             }
         }

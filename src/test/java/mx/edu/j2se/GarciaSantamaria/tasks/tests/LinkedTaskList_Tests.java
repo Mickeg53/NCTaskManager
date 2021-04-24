@@ -1,16 +1,16 @@
 package mx.edu.j2se.GarciaSantamaria.tasks.tests;
 
-import mx.edu.j2se.GarciaSantamaria.tasks.ArrayTaskList;
 import mx.edu.j2se.GarciaSantamaria.tasks.LinkedTaskList;
 import mx.edu.j2se.GarciaSantamaria.tasks.Task;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class LinkedTaskList_Tests {
-    Task tarea1 = new Task("Lavar trastes", 20);
-    Task tarea2 = new Task("Hacer ejercicio", 30, 50, 10);
+    Task tarea1 = new Task("Lavar trastes", LocalDateTime.parse("2021-04-15T15:00:00"));
+    Task tarea2 = new Task("Hacer ejercicio", LocalDateTime.parse("2021-04-15T16:00:00"), LocalDateTime.parse("2021-04-15T18:00:00"), 1);
 
     public LinkedTaskList_Tests() throws Exception {
     }
@@ -29,11 +29,14 @@ public class LinkedTaskList_Tests {
         Assert.assertEquals(tarea2, list.getTask(2));
 
         Assert.assertTrue(list.remove(tarea2));
-        Assert.assertEquals(-1, list.getIndex(tarea2));
+        Assert.assertEquals(1, list.getIndex(tarea2));
 
         Assert.assertTrue(list.remove(tarea1));
         Assert.assertFalse(list.remove(tarea1));
         Assert.assertEquals(-1, list.getIndex(tarea1));
+
+        Assert.assertEquals(tarea2, list.getTask(0));
+        Assert.assertTrue(list.remove(tarea2));
 
     }
 
@@ -91,7 +94,7 @@ public class LinkedTaskList_Tests {
         tarea1.setActive(true);
         tarea2.setActive(true);
 
-        incomingList = (LinkedTaskList) list.incoming(15, 50);   //Obteniendo las tareas que están por ejecutarse en una lista anidada
+        incomingList = (LinkedTaskList) list.incoming(LocalDateTime.parse("2021-04-15T11:00:00"), LocalDateTime.parse("2021-04-15T18:00:00"));   //Obteniendo las tareas que están por ejecutarse en una lista anidada
 
         Assert.assertEquals(tarea1, incomingList.getTask(0));
         Assert.assertEquals(tarea2, incomingList.getTask(1));
@@ -121,7 +124,7 @@ public class LinkedTaskList_Tests {
     }
 
     @Test
-    public void iterador_Test(){
+    public void iterator_Test(){
         LinkedTaskList list = new LinkedTaskList();     //Declarando un nueva lista anidada de todas las tareas
         list.add(tarea1);   //Añadiendo tarea a la lista anidada
         list.add(tarea2);   //Añadiendo tarea a la lista anidada
