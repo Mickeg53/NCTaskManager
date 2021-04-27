@@ -24,34 +24,6 @@ public abstract class AbstractTaskList implements Iterable<Task> {
 
         return (AbstractTaskList) incomingTasks.incoming(this,from, to);
 
-      /*  AbstractTaskList inc = null;
-
-        Stream<Task> incomingTask = null;
-
-        if(this instanceof  LinkedTaskList){
-            LinkedTaskList objLinked = (LinkedTaskList) this;
-            incomingTask = objLinked.getStream();
-            inc = new LinkedTaskList();
-            System.out.println("Ingresó a LinkedTaskList");
-        }
-        if(this instanceof ArrayTaskList){
-            ArrayTaskList objArray = (ArrayTaskList) this;
-            incomingTask = objArray.getStream();
-            inc = new ArrayTaskList();
-            System.out.println("Ingresó a ArrayTaskList");
-        }
-
-        System.out.println(incomingTask.toString());
-
-
-        //assert false;
-        incomingTask.filter((Task task) ->
-            (task.isActive() &&
-                    (((task.time.isAfter(from) || task.time.isEqual(from)) && (task.time.isBefore(to) || task.time.isEqual(to)) && !task.repetitive)
-                    || ((!task.start.isAfter(to) || !task.end.isBefore(from)) && task.repetitive))))
-        .forEach(System.out::println);
-
-        return inc;*/
     };
 
 }

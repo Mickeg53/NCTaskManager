@@ -56,7 +56,7 @@ public class Task {
         }catch(IndexOutOfBoundsException f){
             System.out.println("***La fecha de término no puede ser antes de la fecha de inicio***");
         }catch(IllegalStateException g){
-            System.out.println("***El tiempo de intervalo es inválido***");
+            System.out.println("***El tiempo de intervalo es inválido, ingrese un intervalo en horas***");
         }catch(Exception d){
             System.out.println("***NO se pueden ingresar campos vacios o iguales a cero***");
         }
@@ -134,7 +134,7 @@ public class Task {
         }catch(IndexOutOfBoundsException f){
             System.out.println("***El tiempo de término no puede ser menor al tiempo de inicio***");
         }catch(IllegalStateException g){
-            System.out.println("***El tiempo de intervalo es inválido***");
+            System.out.println("***El tiempo de intervalo es inválido, ingrese un intervalo en horas***");
         }catch(Exception d){
             System.out.println("***NO se pueden ingresar campos vacios o iguales a cero***");
         }

@@ -35,6 +35,7 @@ public class Tasks {
             sortedTasks.put(start, set);
         }
         sortedTasks.forEach((d,t) -> System.out.println(d + "\t | \t"+ t));
+        System.out.println(sortedTasks.firstKey());
         return sortedTasks;
     }
 }
